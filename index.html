@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenova Business Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f3ee;
+      --accent: #c8f04a;
+      --accent-dark: #a8cc30;
+      --grey: #1a1a1a;
+      --mid: #2e2e2e;
+      --muted: #888;
+      --border: #2a2a2a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.95);
+      border-color: var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--black) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      font-weight: 500 !important;
+      font-size: 0.85rem !important;
+    }
+    .nav-cta:hover { background: var(--accent-dark); color: var(--black) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,240,74,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,240,74,0.04) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 3rem;
+      position: relative;
+      font-weight: 300;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--black);
+      padding: 0.9rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-ghost {
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--white); }
+    .hero-scroll {
+      position: absolute;
+      right: 3rem;
+      bottom: 5rem;
+      writing-mode: vertical-rl;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 60px;
+      background: var(--muted);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* SECTION SHARED */
+    section { padding: 7rem 3rem; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ABOUT / INTRO */
+    .intro {
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .intro-text p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+    .intro-text p strong { color: var(--white); font-weight: 500; }
+    .intro-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5px;
+      background: var(--border);
+    }
+    .stat {
+      background: var(--grey);
+      padding: 2.5rem 2rem;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* SERVICES */
+    .services { border-top: 1px solid var(--border); }
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+    }
+    .service-card {
+      background: var(--grey);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: var(--mid); }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+    .service-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* HOW IT WORKS */
+    .process { border-top: 1px solid var(--border); background: var(--grey); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 4rem;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: var(--border);
+    }
+    .step {
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .step-dot {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: var(--black);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      position: relative;
+      z-index: 1;
+    }
+    .step h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .step p {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* PRICING */
+    .pricing { border-top: 1px solid var(--border); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      margin-top: 4rem;
+    }
+    .plan {
+      background: var(--grey);
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+    .plan.featured {
+      background: var(--mid);
+    }
+    .plan.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      background: var(--accent);
+      color: var(--black);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+    }
+    .plan-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .plan-price {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .plan-price span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .plan-desc {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .plan-features {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+    .plan-features li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .plan-features li::before {
+      content: '→';
+      color: var(--accent);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    .plan-features li strong { color: var(--white); font-weight: 400; }
+    .btn-plan {
+      display: block;
+      text-align: center;
+      padding: 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+    }
+    .btn-plan-outline {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-plan-outline:hover { border-color: var(--white); color: var(--white); }
+    .btn-plan-solid {
+      background: var(--accent);
+      color: var(--black);
+    }
+    .btn-plan-solid:hover { background: var(--accent-dark); }
+
+    /* CONTACT */
+    .contact { border-top: 1px solid var(--border); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .contact-info p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+    .contact-item-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      min-width: 80px;
+    }
+    .contact-item a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item a:hover { color: var(--white); }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--grey);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 0.85rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select option { background: var(--grey); }
+    .btn-submit {
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      padding: 1rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .btn-submit:hover { background: var(--accent-dark); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+    footer p {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      nav ul { display: none; }
+      .hero { padding: 0 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      .intro { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .process-steps::before { display: none; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .hero-scroll { display: none; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="logo">Zenova<span>.</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-tag">AI-Powered Business Solutions</div>
+    <h1>Your business,<br><em>intelligently</em><br>assisted.</h1>
+    <p class="hero-sub">Zenova Business Solutions delivers AI-driven automation for South African businesses — so you can focus on what matters.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start Today</a>
+      <a href="#services" class="btn-ghost">Explore services →</a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="intro" id="about">
+    <div class="intro-text fade-up">
+      <div class="section-label">About Us</div>
+      <h2>Built for the way South African businesses actually work.</h2>
+      <p>Zenova Business Solutions is a Port Elizabeth-based technology company delivering AI assistant services to small and medium businesses across South Africa.</p>
+      <p>Our flagship product, <strong>Margaret</strong>, is an intelligent business assistant that handles emails, scheduling, HR documentation, payroll queries, and more — all via WhatsApp.</p>
+      <p>No complex software. No steep learning curve. Just <strong>message Margaret</strong> like you'd message a colleague.</p>
+    </div>
+    <div class="intro-stats fade-up">
+      <div class="stat">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Always available</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">SA</div>
+        <div class="stat-label">Built for South Africa</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">WhatsApp</div>
+        <div class="stat-label">No new apps needed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">HR + IT</div>
+        <div class="stat-label">Multi-domain expertise</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <div>
+        <div class="section-label fade-up">What We Do</div>
+        <h2 class="fade-up">One assistant.<br>Every department.</h2>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-num">01</div>
+        <h3>HR &amp; IR Support</h3>
+        <p>Disciplinary procedures, written warnings, hearing notices, CCMA guidance, and BCEA compliance — all generated instantly via WhatsApp.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">02</div>
+        <h3>Payroll Intelligence</h3>
+        <p>PAYE calculations, UIF and SDL queries, ETI guidance, Sage VIP support, and SA tax table lookups — updated annually for the current tax year.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">03</div>
+        <h3>Email &amp; Calendar</h3>
+        <p>Drafts and sends professional emails in your voice, manages your calendar, schedules meetings, and follows up on replies automatically.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">04</div>
+        <h3>Document Generation</h3>
+        <p>Employment letters, contracts, disciplinary findings, and HR policy documents — professionally formatted Word documents in seconds.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">05</div>
+        <h3>Business Intelligence</h3>
+        <p>Market research, competitor pricing, stock scanning, and deal analysis for traders and resellers — powered by live web data.</p>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-num">06</div>
+        <h3>Custom Automation</h3>
+        <p>Bespoke workflow automation built for your specific business processes. If you can describe it, we can automate it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="process" id="how">
+    <div class="section-label fade-up">The Process</div>
+    <h2 class="fade-up">Up and running<br>in days, not months.</h2>
+    <div class="process-steps">
+      <div class="step fade-up">
+        <div class="step-dot">01</div>
+        <h4>Consultation</h4>
+        <p>We understand your business, your team, and the tasks eating your time.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-dot">02</div>
+        <h4>Configuration</h4>
+        <p>Margaret is set up with your business context, templates, and workflows.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-dot">03</div>
+        <h4>Onboarding</h4>
+        <p>Your team is added via WhatsApp — no app downloads, no training required.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-dot">04</div>
+        <h4>Go Live</h4>
+        <p>Start messaging Margaret immediately. She learns your preferences over time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="section-label fade-up">Pricing</div>
+    <h2 class="fade-up">Simple, transparent pricing.<br>Cancel anytime.</h2>
+    <div class="pricing-grid">
+      <div class="plan fade-up">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">R500 <span>/month</span></div>
+        <div class="plan-desc">For solo operators and micro businesses needing a smart assistant.</div>
+        <ul class="plan-features">
+          <li><strong>WhatsApp assistant</strong> — 1 user</li>
+          <li><strong>Email</strong> drafting &amp; sending</li>
+          <li><strong>Calendar</strong> management</li>
+          <li><strong>General</strong> business queries</li>
+          <li>Business hours support</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-outline">Get Started</a>
+      </div>
+      <div class="plan featured fade-up">
+        <div class="plan-name">HR Pack</div>
+        <div class="plan-price">R1,500 <span>/month</span></div>
+        <div class="plan-desc">For HR consultants and businesses with active labour relations needs.</div>
+        <ul class="plan-features">
+          <li><strong>Everything</strong> in Starter</li>
+          <li><strong>IR Agent</strong> — disciplinaries, CCMA</li>
+          <li><strong>HR Agent</strong> — BCEA, contracts, leave</li>
+          <li><strong>Payroll Expert</strong> — PAYE, UIF, Sage</li>
+          <li>Up to 3 users</li>
+          <li>Document generation</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-solid">Get Started</a>
+      </div>
+      <div class="plan fade-up">
+        <div class="plan-name">Enterprise</div>
+        <div class="plan-price">Custom</div>
+        <div class="plan-desc">For businesses needing full automation, multiple users, and custom integrations.</div>
+        <ul class="plan-features">
+          <li><strong>Everything</strong> in HR Pack</li>
+          <li><strong>Unlimited</strong> users</li>
+          <li><strong>Custom</strong> workflows &amp; agents</li>
+          <li><strong>Sage</strong> direct integration</li>
+          <li><strong>Priority</strong> support &amp; SLA</li>
+          <li>White-label option</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-info fade-up">
+        <div class="section-label">Get In Touch</div>
+        <h2>Let's put Margaret<br>to work for you.</h2>
+        <p>Tell us about your business and we'll set up a free demonstration. Most clients are live within 48 hours of sign-up.</p>
+        <div class="contact-detail">
+          <div class="contact-item">
+            <span class="contact-item-label">Email</span>
+            <a href="mailto:info@zenovabusiness.co.za">info@zenovabusiness.co.za</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Location</span>
+            <span style="color: var(--muted)">Gqeberha (Port Elizabeth), Eastern Cape</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-item-label">Website</span>
+            <a href="https://zenovabusiness.co.za">zenovabusiness.co.za</a>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Brendan" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Hayward" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Business Email</label>
+          <input type="email" placeholder="you@yourbusiness.co.za" required>
+        </div>
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" placeholder="Your Business Name" required>
+        </div>
+        <div class="form-group">
+          <label>I'm interested in</label>
+          <select>
+            <option value="">Select a service...</option>
+            <option>Starter — R500/month</option>
+            <option>HR Pack — R1,500/month</option>
+            <option>Enterprise — Custom pricing</option>
+            <option>Just want a demo first</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us about your business</label>
+          <textarea placeholder="What does your business do? What tasks are taking up too much of your time?"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Enquiry →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">Zenova<span>.</span></a>
+    <p>© 2026 Zenova Business Solutions (Pty) Ltd. Gqeberha, South Africa.</p>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Fade up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.textContent = 'Sent! We\'ll be in touch shortly.';
+      btn.style.background = '#2a2a2a';
+      btn.style.color = '#c8f04a';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
