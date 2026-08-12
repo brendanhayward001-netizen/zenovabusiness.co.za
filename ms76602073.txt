@@ -1,0 +1,5 @@
+﻿{
+  "Description": "Domain ownership verification file for Microsoft 365 - place in the website root",
+  "Domain": "zenovabusiness.co.za",
+  "Id": "d32b8adf-da26-421d-b6e1-e6c7cd8d2c5e"
+}
