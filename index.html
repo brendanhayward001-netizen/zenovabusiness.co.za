@@ -1,902 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zenova Business Solutions</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --black: #0a0a0a;
-      --white: #f5f3ee;
-      --accent: #c8f04a;
-      --accent-dark: #a8cc30;
-      --grey: #1a1a1a;
-      --mid: #2e2e2e;
-      --muted: #888;
-      --border: #2a2a2a;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenova Business Solutions — Workforce scheduling and HR administration software</title>
+<meta name="description" content="Zenova Business Solutions builds Margaret: workforce scheduling and HR administration software for South African employers. Gqeberha, Eastern Cape.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F1EB;
+  --paper-2:#EAE5DB;
+  --paper-3:#DFD9CC;
+  --ink:#15181C;
+  --ink-2:#3B4149;
+  --muted:#767C85;
+  --petrol:#0F423D;
+  --petrol-2:#1A6159;
+  --petrol-tint:#D8E4E1;
+  --ochre:#B87A14;
+  --ochre-tint:#F0E1C4;
+  --line:#CFC8B9;
+  --maxw:1200px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Instrument Sans',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;letter-spacing:-0.03em;line-height:1.02}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ---------- nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 32px;
+  border-bottom:1px solid transparent;
+  transition:background .3s,border-color .3s;
+}
+.nav.stuck{background:rgba(244,241,235,.92);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+.brand{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.04em;text-decoration:none}
+.brand i{color:var(--petrol-2);font-style:normal}
+.navlinks{display:flex;gap:28px;list-style:none;align-items:center}
+.navlinks a{font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
+.navlinks a:hover{color:var(--ink);border-bottom-color:var(--petrol-2)}
+.navbtn{
+  background:var(--petrol);color:var(--paper);text-decoration:none;
+  font-size:14px;font-weight:600;padding:10px 20px;border-radius:2px;
+  transition:background .2s;
+}
+.navbtn:hover{background:var(--petrol-2)}
+.navtoggle{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer}
 
-    html { scroll-behavior: smooth; }
+/* ---------- hero ---------- */
+.hero{padding:150px 0 80px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--petrol-2);margin-bottom:22px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--petrol-2)}
+h1{font-size:clamp(40px,5.4vw,68px);margin-bottom:24px}
+h1 em{font-style:normal;color:var(--petrol-2)}
+.lede{font-size:19px;color:var(--ink-2);max-width:34em;margin-bottom:32px}
+.cta-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn{
+  display:inline-block;background:var(--petrol);color:var(--paper);
+  text-decoration:none;font-weight:600;font-size:15px;
+  padding:14px 26px;border-radius:2px;transition:background .2s,transform .2s;
+}
+.btn:hover{background:var(--petrol-2);transform:translateY(-1px)}
+.btn-ghost{
+  display:inline-block;text-decoration:none;font-weight:600;font-size:15px;
+  padding:14px 22px;border:1px solid var(--line);border-radius:2px;
+  transition:border-color .2s,background .2s;
+}
+.btn-ghost:hover{border-color:var(--petrol-2);background:var(--paper-2)}
 
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+/* ---------- signature: coverage grid ---------- */
+.panel{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:3px;
+  padding:22px;
+}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;color:var(--muted)}
+.demand{display:grid;grid-template-columns:52px 1fr;gap:8px;margin-bottom:6px}
+.demand-label{color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;align-self:end;padding-bottom:2px}
+.demand-bars{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;align-items:end;height:46px}
+.dbar{background:var(--ochre-tint);border-top:2px solid var(--ochre);transform-origin:bottom;transform:scaleY(0);animation:grow .5s cubic-bezier(.2,.7,.3,1) forwards}
+.rows{display:grid;gap:3px}
+.row{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:center}
+.rname{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.04em}
+.track{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;height:17px}
+.cell{background:var(--paper-3);border-radius:1px}
+.shift{background:var(--petrol);border-radius:1px;opacity:0;animation:pop .38s cubic-bezier(.2,.8,.3,1) forwards}
+.brk{background:var(--paper);border:1px solid var(--petrol-tint);border-radius:1px;opacity:0;animation:pop .38s cubic-bezier(.2,.8,.3,1) forwards}
+.hours{display:grid;grid-template-columns:52px 1fr;gap:8px;margin-top:10px}
+.hours-inner{display:grid;grid-template-columns:repeat(12,1fr);gap:2px}
+.hours-inner span{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--muted);text-align:center}
+.legend{display:flex;gap:18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.lg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+.sw{width:11px;height:11px;border-radius:1px}
+@keyframes pop{to{opacity:1}}
+@keyframes grow{to{transform:scaleY(1)}}
 
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.4rem 3rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    nav.scrolled {
-      background: rgba(10,10,10,0.95);
-      border-color: var(--border);
-      backdrop-filter: blur(12px);
-    }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      text-decoration: none;
-    }
-    .logo span { color: var(--accent); }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2.5rem;
-    }
-    nav ul a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.88rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    nav ul a:hover { color: var(--white); }
-    .nav-cta {
-      background: var(--accent);
-      color: var(--black) !important;
-      padding: 0.5rem 1.2rem;
-      border-radius: 2px;
-      font-weight: 500 !important;
-      font-size: 0.85rem !important;
-    }
-    .nav-cta:hover { background: var(--accent-dark); color: var(--black) !important; }
+/* ---------- sections ---------- */
+.sec{padding:96px 0;border-top:1px solid var(--line)}
+.sec-head{max-width:52ch;margin-bottom:56px}
+.sec-head h2{font-size:clamp(30px,3.6vw,44px);margin:14px 0 18px}
+.sec-head p{color:var(--ink-2);font-size:18px}
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 3rem 5rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,240,74,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,240,74,0.04) 0%, transparent 50%);
-    }
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-    .hero-tag::before {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--accent);
-    }
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      position: relative;
-      margin-bottom: 2rem;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 480px;
-      margin-bottom: 3rem;
-      position: relative;
-      font-weight: 300;
-    }
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      position: relative;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: var(--black);
-      padding: 0.9rem 2rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      letter-spacing: 0.03em;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
-    .btn-ghost {
-      color: var(--muted);
-      font-size: 0.88rem;
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.2s;
-    }
-    .btn-ghost:hover { color: var(--white); }
-    .hero-scroll {
-      position: absolute;
-      right: 3rem;
-      bottom: 5rem;
-      writing-mode: vertical-rl;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .hero-scroll::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 60px;
-      background: var(--muted);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-    @keyframes scrollLine {
-      0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
-      50% { opacity: 1; transform: scaleY(1); }
-    }
+.products{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:3px;
+  padding:36px;display:flex;flex-direction:column;
+  transition:border-color .25s,transform .25s;
+}
+.card:hover{border-color:var(--petrol-2);transform:translateY(-2px)}
+.card h3{font-size:26px;margin:12px 0 14px}
+.card > p{color:var(--ink-2);margin-bottom:22px}
+.card ul{list-style:none;margin-top:auto}
+.card li{
+  padding:11px 0 11px 22px;border-top:1px solid var(--line);
+  font-size:15px;color:var(--ink-2);position:relative;
+}
+.card li::before{content:"";position:absolute;left:0;top:19px;width:9px;height:1px;background:var(--petrol-2)}
 
-    /* SECTION SHARED */
-    section { padding: 7rem 3rem; }
-    .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .section-label::before {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 1px;
-      background: var(--accent);
-    }
-    h2 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      margin-bottom: 1.5rem;
-    }
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.step{background:var(--paper);padding:30px 26px}
+.step .n{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--petrol-2);letter-spacing:.1em;display:block;margin-bottom:14px}
+.step h3{font-size:19px;letter-spacing:-0.02em;margin-bottom:10px}
+.step p{font-size:15px;color:var(--ink-2)}
 
-    /* ABOUT / INTRO */
-    .intro {
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .intro-text p {
-      color: var(--muted);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      line-height: 1.8;
-    }
-    .intro-text p strong { color: var(--white); font-weight: 500; }
-    .intro-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5px;
-      background: var(--border);
-    }
-    .stat {
-      background: var(--grey);
-      padding: 2.5rem 2rem;
-    }
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
+.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.pricelist{list-style:none}
+.pricelist li{padding:22px 0;border-top:1px solid var(--line)}
+.pricelist strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.02em;margin-bottom:6px}
+.pricelist span{color:var(--ink-2);font-size:15px}
 
-    /* SERVICES */
-    .services { border-top: 1px solid var(--border); }
-    .services-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 4rem;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: var(--border);
-    }
-    .service-card {
-      background: var(--grey);
-      padding: 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
-    }
-    .service-card:hover { background: var(--mid); }
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-    .service-card:hover::before { transform: scaleX(1); }
-    .service-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-    .service-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -0.01em;
-    }
-    .service-card p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
+.quotes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px}
+.quote{border-left:2px solid var(--petrol-2);padding:4px 0 4px 22px}
+.quote p{font-size:16px;color:var(--ink-2);margin-bottom:12px}
+.quote .who{color:var(--muted)}
 
-    /* HOW IT WORKS */
-    .process { border-top: 1px solid var(--border); background: var(--grey); }
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      margin-top: 4rem;
-      position: relative;
-    }
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 1.5rem;
-      left: 12.5%;
-      right: 12.5%;
-      height: 1px;
-      background: var(--border);
-    }
-    .step {
-      padding: 0 2rem;
-      text-align: center;
-    }
-    .step-dot {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      background: var(--black);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--accent);
-      position: relative;
-      z-index: 1;
-    }
-    .step h4 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .step p {
-      font-size: 0.83rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
+.contact{background:var(--petrol);color:var(--paper);border-radius:3px;padding:64px 56px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+.contact h2{font-size:clamp(28px,3.4vw,40px);margin-bottom:16px}
+.contact p{color:#BFD3CF;max-width:44ch}
+.contact .btn{background:var(--paper);color:var(--petrol)}
+.contact .btn:hover{background:#fff}
+.contact .mono{color:#8FB3AD}
 
-    /* PRICING */
-    .pricing { border-top: 1px solid var(--border); }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: var(--border);
-      margin-top: 4rem;
-    }
-    .plan {
-      background: var(--grey);
-      padding: 3rem 2.5rem;
-      position: relative;
-    }
-    .plan.featured {
-      background: var(--mid);
-    }
-    .plan.featured::before {
-      content: 'Most Popular';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-      background: var(--accent);
-      color: var(--black);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.3rem 1rem;
-    }
-    .plan-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .plan-price {
-      font-family: 'Syne', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 0.25rem;
-    }
-    .plan-price span {
-      font-size: 1rem;
-      font-weight: 400;
-      color: var(--muted);
-    }
-    .plan-desc {
-      font-size: 0.83rem;
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .plan-features {
-      list-style: none;
-      margin-bottom: 2.5rem;
-    }
-    .plan-features li {
-      font-size: 0.85rem;
-      color: var(--muted);
-      padding: 0.6rem 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .plan-features li::before {
-      content: '→';
-      color: var(--accent);
-      font-size: 0.75rem;
-      flex-shrink: 0;
-    }
-    .plan-features li strong { color: var(--white); font-weight: 400; }
-    .btn-plan {
-      display: block;
-      text-align: center;
-      padding: 0.85rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-decoration: none;
-      letter-spacing: 0.03em;
-      transition: all 0.2s;
-    }
-    .btn-plan-outline {
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    .btn-plan-outline:hover { border-color: var(--white); color: var(--white); }
-    .btn-plan-solid {
-      background: var(--accent);
-      color: var(--black);
-    }
-    .btn-plan-solid:hover { background: var(--accent-dark); }
+footer{border-top:1px solid var(--line);padding:56px 0 72px;margin-top:96px}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
+.foot h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:16px}
+.foot ul{list-style:none}
+.foot li{margin-bottom:9px;font-size:15px;color:var(--ink-2)}
+.foot a{color:var(--ink-2);text-decoration:none}
+.foot a:hover{color:var(--petrol-2)}
+.legal{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 
-    /* CONTACT */
-    .contact { border-top: 1px solid var(--border); }
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-    .contact-info p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-    .contact-detail {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 0.9rem;
-    }
-    .contact-item-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      min-width: 80px;
-    }
-    .contact-item a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .contact-item a:hover { color: var(--white); }
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-    .form-group label {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      background: var(--grey);
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 0.85rem 1rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 300;
-      outline: none;
-      transition: border-color 0.2s;
-      -webkit-appearance: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus { border-color: var(--accent); }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-group select option { background: var(--grey); }
-    .btn-submit {
-      background: var(--accent);
-      color: var(--black);
-      border: none;
-      padding: 1rem 2rem;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      font-size: 0.9rem;
-      cursor: pointer;
-      letter-spacing: 0.03em;
-      transition: background 0.2s;
-      align-self: flex-start;
-    }
-    .btn-submit:hover { background: var(--accent-dark); }
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      color: var(--white);
-      text-decoration: none;
-    }
-    .footer-logo span { color: var(--accent); }
-    footer p {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .footer-links a {
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--white); }
+a:focus-visible,button:focus-visible{outline:2px solid var(--petrol-2);outline-offset:3px}
 
-    /* ANIMATIONS */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav { padding: 1.2rem 1.5rem; }
-      nav ul { display: none; }
-      .hero { padding: 0 1.5rem 4rem; }
-      section { padding: 5rem 1.5rem; }
-      .intro { grid-template-columns: 1fr; gap: 3rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .process-steps::before { display: none; }
-      .pricing-grid { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .form-row { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-      .hero-scroll { display: none; }
-      .services-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    }
-  </style>
+@media (max-width:960px){
+  .hero-grid,.products,.split,.contact{grid-template-columns:1fr}
+  .steps,.quotes{grid-template-columns:1fr 1fr}
+  .foot{grid-template-columns:1fr 1fr}
+  .contact{padding:44px 32px}
+}
+@media (max-width:680px){
+  .navlinks{display:none}
+  .navtoggle{display:block}
+  .nav.open .navlinks{
+    display:flex;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;background:var(--paper);
+    border-bottom:1px solid var(--line);padding:8px 32px 20px;
+  }
+  .nav.open .navlinks a{padding:12px 0;width:100%}
+  .steps,.quotes{grid-template-columns:1fr}
+  .hero{padding:120px 0 56px}
+  .sec{padding:68px 0}
+  .wrap{padding:0 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .shift,.brk{opacity:1}
+  .dbar{transform:scaleY(1)}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a href="#" class="logo">Zenova<span>.</span></a>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#contact" class="nav-cta">Get Started</a></li>
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">Zenova<i>.</i></a>
+  <ul class="navlinks">
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="navbtn">Talk to us</a></li>
+  </ul>
+  <button class="navtoggle" id="navtoggle" aria-label="Menu" aria-expanded="false">Menu</button>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow mono">Workforce software · Gqeberha</div>
+      <h1>Staff your business against <em>real demand.</em></h1>
+      <p class="lede">Zenova builds Margaret — scheduling and HR administration software for South African employers. Rosters built from your own trading data. Personnel records that stand up when someone asks for them.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn">Book a walkthrough</a>
+        <a href="#platform" class="btn-ghost">See the platform</a>
+      </div>
+    </div>
+
+    <div class="panel" aria-hidden="true">
+      <div class="panel-head">
+        <span class="mono">Coverage · Thursday</span>
+        <span class="mono">Trading 07:00–19:00</span>
+      </div>
+      <div class="demand">
+        <div class="demand-label">Demand</div>
+        <div class="demand-bars" id="dbars"></div>
+      </div>
+      <div class="rows" id="rows"></div>
+      <div class="hours">
+        <div></div>
+        <div class="hours-inner">
+          <span>07</span><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span>
+          <span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="lg"><span class="sw" style="background:var(--petrol)"></span>On shift</div>
+        <div class="lg"><span class="sw" style="background:var(--paper);border:1px solid var(--petrol-tint)"></span>Meal break</div>
+        <div class="lg"><span class="sw" style="background:var(--ochre-tint);border-top:2px solid var(--ochre)"></span>Customer demand</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="platform">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="mono" style="color:var(--petrol-2)">The platform</div>
+      <h2>Two products. One system of record.</h2>
+      <p>Margaret runs the two jobs that quietly consume a manager's week: deciding who works when, and keeping the paperwork straight. Use either on its own, or both together.</p>
+    </div>
+
+    <div class="products">
+      <div class="card reveal">
+        <div class="mono" style="color:var(--petrol-2)">Margaret Scheduler</div>
+        <h3>Rosters built from your trading pattern</h3>
+        <p>We start with your own point-of-sale history and work out when customers actually arrive — not when everyone assumes they do. The roster is then built to meet that demand within the hours you already pay for.</p>
+        <ul>
+          <li>Shift patterns and rest-day cycles that rotate fairly</li>
+          <li>Working-time limits and meal breaks applied as you build</li>
+          <li>Leave, cover and public holidays handled in one place</li>
+          <li>Printable rosters for the noticeboard, live view for managers</li>
+        </ul>
+      </div>
+
+      <div class="card reveal">
+        <div class="mono" style="color:var(--petrol-2)">Margaret HR &amp; IR</div>
+        <h3>Personnel records you can produce on demand</h3>
+        <p>Every employee file in one place, with the system telling you what is missing rather than you finding out at the worst moment. Contracts, certificates and disciplinary records filed against the right person, with an audit trail.</p>
+        <ul>
+          <li>Documents filed automatically as they arrive</li>
+          <li>A live view of which files are complete and which are not</li>
+          <li>Expiry tracking for tickets, permits and certificates</li>
+          <li>Disciplinary and grievance matters recorded from start to finish</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="mono" style="color:var(--petrol-2)">How it works</div>
+      <h2>We do the setup. You run the business.</h2>
+      <p>Onboarding is done with you, not handed to you as a login and a manual. Most clients are live within a few weeks.</p>
+    </div>
+
+    <div class="steps reveal">
+      <div class="step">
+        <span class="n">01</span>
+        <h3>We look at what you have</h3>
+        <p>Trading data, current rosters, existing personnel files. We tell you what we find, including the parts you would rather we didn't.</p>
+      </div>
+      <div class="step">
+        <span class="n">02</span>
+        <h3>We build your setup</h3>
+        <p>Departments, shift patterns, roles and document requirements configured to how your business actually operates.</p>
+      </div>
+      <div class="step">
+        <span class="n">03</span>
+        <h3>We load your people</h3>
+        <p>Staff and existing documents brought in and filed. You see the gaps immediately, with a plan for closing them.</p>
+      </div>
+      <div class="step">
+        <span class="n">04</span>
+        <h3>You take it from there</h3>
+        <p>Managers work in the browser or over WhatsApp. We stay reachable, and we keep improving the platform behind you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="pricing">
+  <div class="wrap split">
+    <div class="reveal">
+      <div class="mono" style="color:var(--petrol-2)">Pricing</div>
+      <h2 style="font-size:clamp(30px,3.6vw,44px);margin:14px 0 18px">Priced per person, not per seat.</h2>
+      <p style="color:var(--ink-2);font-size:18px;margin-bottom:24px">You pay for the people on your payroll, not for how many managers need to log in. Larger workforces move to lower per-person rates automatically.</p>
+      <p style="color:var(--ink-2)">Every quote is written down before anything starts, and there is no charge while we are still setting you up. Ask us for a figure and you will get one — we would rather have that conversation than publish a number that does not fit your business.</p>
+      <div class="cta-row" style="margin-top:28px">
+        <a href="#contact" class="btn">Ask for a quote</a>
+      </div>
+    </div>
+    <ul class="pricelist reveal">
+      <li>
+        <strong>A once-off setup fee</strong>
+        <span>Covers the analysis, configuration and loading of your existing records. Charged per department, so a single site costs less than a group.</span>
+      </li>
+      <li>
+        <strong>A monthly rate per employee</strong>
+        <span>Banded, so the rate drops as headcount rises. A minimum monthly figure applies to each band.</span>
+      </li>
+      <li>
+        <strong>No charge for extra users</strong>
+        <span>Add as many managers, supervisors and administrators as the business needs.</span>
+      </li>
+      <li>
+        <strong>No lock-in on the software</strong>
+        <span>Month to month. Your data stays yours, and you can have it back on request.</span>
+      </li>
     </ul>
-  </nav>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-tag">AI-Powered Business Solutions</div>
-    <h1>Your business,<br><em>intelligently</em><br>assisted.</h1>
-    <p class="hero-sub">Zenova Business Solutions delivers AI-driven automation for South African businesses — so you can focus on what matters.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Start Today</a>
-      <a href="#services" class="btn-ghost">Explore services →</a>
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="mono" style="color:var(--petrol-2)">About Zenova</div>
+      <h2>Built here, for how business is actually run here.</h2>
+      <p>Zenova Business Solutions is a South African software company based in Gqeberha. We build and own the Margaret platform, and we work directly with the people who use it — store managers, operations managers and payroll administrators.</p>
     </div>
-    <div class="hero-scroll">Scroll</div>
-  </section>
 
-  <!-- ABOUT -->
-  <section class="intro" id="about">
-    <div class="intro-text fade-up">
-      <div class="section-label">About Us</div>
-      <h2>Built for the way South African businesses actually work.</h2>
-      <p>Zenova Business Solutions is a Port Elizabeth-based technology company delivering AI assistant services to small and medium businesses across South Africa.</p>
-      <p>Our flagship product, <strong>Margaret</strong>, is an intelligent business assistant that handles emails, scheduling, HR documentation, payroll queries, and more — all via WhatsApp.</p>
-      <p>No complex software. No steep learning curve. Just <strong>message Margaret</strong> like you'd message a colleague.</p>
-    </div>
-    <div class="intro-stats fade-up">
-      <div class="stat">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Always available</div>
+    <div class="split" style="margin-bottom:56px">
+      <div class="reveal">
+        <h3 style="font-size:22px;margin-bottom:14px">South African by design</h3>
+        <p style="color:var(--ink-2)">Working hours, breaks, Sunday and public holiday rules, and record-keeping obligations are built into the platform rather than bolted on. Personal information is handled in line with POPIA, and clients are told exactly what we hold and why.</p>
       </div>
-      <div class="stat">
-        <div class="stat-num">SA</div>
-        <div class="stat-label">Built for South Africa</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">WhatsApp</div>
-        <div class="stat-label">No new apps needed</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">HR + IT</div>
-        <div class="stat-label">Multi-domain expertise</div>
+      <div class="reveal">
+        <h3 style="font-size:22px;margin-bottom:14px">Employment expertise alongside the software</h3>
+        <p style="color:var(--ink-2)">Margaret is delivered in partnership with an established HR and industrial relations practice. Where a matter needs a practitioner — chairing an enquiry, or representing an employer at the CCMA — that expertise sits alongside the platform rather than being something you have to go and find.</p>
       </div>
     </div>
-  </section>
 
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="services-header">
+    <div class="quotes">
+      <div class="quote reveal">
+        <p>A supermarket group using Margaret Scheduler cut its worst coverage gaps by more than half — without adding a single paid hour to the roster.</p>
+        <div class="who mono">Retail · Eastern Cape</div>
+      </div>
+      <div class="quote reveal">
+        <p>An industrial employer moved several hundred personnel files into Margaret HR, and for the first time could see at a glance which employee records were incomplete.</p>
+        <div class="who mono">Manufacturing · Eastern Cape</div>
+      </div>
+      <div class="quote reveal">
+        <p>Managers receive their rosters and respond to routine HR requests over WhatsApp, on the phone already in their pocket.</p>
+        <div class="who mono">Across both products</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contact" style="border-top:none">
+  <div class="wrap">
+    <div class="contact reveal">
       <div>
-        <div class="section-label fade-up">What We Do</div>
-        <h2 class="fade-up">One assistant.<br>Every department.</h2>
+        <div class="mono" style="margin-bottom:14px">Get in touch</div>
+        <h2>Tell us how you staff your business.</h2>
+        <p>Send us a note about your operation — how many people, how many sites, and what is currently taking up your time. We will come back with a straight answer about whether Margaret helps.</p>
+      </div>
+      <div>
+        <a href="mailto:info@zenovabusiness.co.za?subject=Enquiry%20via%20zenovabusiness.co.za" class="btn">Email us</a>
       </div>
     </div>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="service-num">01</div>
-        <h3>HR &amp; IR Support</h3>
-        <p>Disciplinary procedures, written warnings, hearing notices, CCMA guidance, and BCEA compliance — all generated instantly via WhatsApp.</p>
-      </div>
-      <div class="service-card fade-up">
-        <div class="service-num">02</div>
-        <h3>Payroll Intelligence</h3>
-        <p>PAYE calculations, UIF and SDL queries, ETI guidance, Sage VIP support, and SA tax table lookups — updated annually for the current tax year.</p>
-      </div>
-      <div class="service-card fade-up">
-        <div class="service-num">03</div>
-        <h3>Email &amp; Calendar</h3>
-        <p>Drafts and sends professional emails in your voice, manages your calendar, schedules meetings, and follows up on replies automatically.</p>
-      </div>
-      <div class="service-card fade-up">
-        <div class="service-num">04</div>
-        <h3>Document Generation</h3>
-        <p>Employment letters, contracts, disciplinary findings, and HR policy documents — professionally formatted Word documents in seconds.</p>
-      </div>
-      <div class="service-card fade-up">
-        <div class="service-num">05</div>
-        <h3>Business Intelligence</h3>
-        <p>Market research, competitor pricing, stock scanning, and deal analysis for traders and resellers — powered by live web data.</p>
-      </div>
-      <div class="service-card fade-up">
-        <div class="service-num">06</div>
-        <h3>Custom Automation</h3>
-        <p>Bespoke workflow automation built for your specific business processes. If you can describe it, we can automate it.</p>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- HOW IT WORKS -->
-  <section class="process" id="how">
-    <div class="section-label fade-up">The Process</div>
-    <h2 class="fade-up">Up and running<br>in days, not months.</h2>
-    <div class="process-steps">
-      <div class="step fade-up">
-        <div class="step-dot">01</div>
-        <h4>Consultation</h4>
-        <p>We understand your business, your team, and the tasks eating your time.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-dot">02</div>
-        <h4>Configuration</h4>
-        <p>Margaret is set up with your business context, templates, and workflows.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-dot">03</div>
-        <h4>Onboarding</h4>
-        <p>Your team is added via WhatsApp — no app downloads, no training required.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-dot">04</div>
-        <h4>Go Live</h4>
-        <p>Start messaging Margaret immediately. She learns your preferences over time.</p>
-      </div>
-    </div>
-  </section>
+</main>
 
-  <!-- PRICING -->
-  <section class="pricing" id="pricing">
-    <div class="section-label fade-up">Pricing</div>
-    <h2 class="fade-up">Simple, transparent pricing.<br>Cancel anytime.</h2>
-    <div class="pricing-grid">
-      <div class="plan fade-up">
-        <div class="plan-name">Starter</div>
-        <div class="plan-price">R500 <span>/month</span></div>
-        <div class="plan-desc">For solo operators and micro businesses needing a smart assistant.</div>
-        <ul class="plan-features">
-          <li><strong>WhatsApp assistant</strong> — 1 user</li>
-          <li><strong>Email</strong> drafting &amp; sending</li>
-          <li><strong>Calendar</strong> management</li>
-          <li><strong>General</strong> business queries</li>
-          <li>Business hours support</li>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="brand" style="font-size:22px">Zenova<i>.</i></a>
+        <p style="color:var(--ink-2);max-width:32ch;margin-top:12px;font-size:15px">Workforce scheduling and HR administration software for South African employers.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#platform">Margaret Scheduler</a></li>
+          <li><a href="#platform">Margaret HR &amp; IR</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
         </ul>
-        <a href="#contact" class="btn-plan btn-plan-outline">Get Started</a>
       </div>
-      <div class="plan featured fade-up">
-        <div class="plan-name">HR Pack</div>
-        <div class="plan-price">R1,500 <span>/month</span></div>
-        <div class="plan-desc">For HR consultants and businesses with active labour relations needs.</div>
-        <ul class="plan-features">
-          <li><strong>Everything</strong> in Starter</li>
-          <li><strong>IR Agent</strong> — disciplinaries, CCMA</li>
-          <li><strong>HR Agent</strong> — BCEA, contracts, leave</li>
-          <li><strong>Payroll Expert</strong> — PAYE, UIF, Sage</li>
-          <li>Up to 3 users</li>
-          <li>Document generation</li>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:info@zenovabusiness.co.za">info@zenovabusiness.co.za</a></li>
+          <li>Gqeberha, Eastern Cape</li>
+          <li>South Africa</li>
         </ul>
-        <a href="#contact" class="btn-plan btn-plan-solid">Get Started</a>
-      </div>
-      <div class="plan fade-up">
-        <div class="plan-name">Enterprise</div>
-        <div class="plan-price">Custom</div>
-        <div class="plan-desc">For businesses needing full automation, multiple users, and custom integrations.</div>
-        <ul class="plan-features">
-          <li><strong>Everything</strong> in HR Pack</li>
-          <li><strong>Unlimited</strong> users</li>
-          <li><strong>Custom</strong> workflows &amp; agents</li>
-          <li><strong>Sage</strong> direct integration</li>
-          <li><strong>Priority</strong> support &amp; SLA</li>
-          <li>White-label option</li>
-        </ul>
-        <a href="#contact" class="btn-plan btn-plan-outline">Contact Us</a>
       </div>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="contact-inner">
-      <div class="contact-info fade-up">
-        <div class="section-label">Get In Touch</div>
-        <h2>Let's put Margaret<br>to work for you.</h2>
-        <p>Tell us about your business and we'll set up a free demonstration. Most clients are live within 48 hours of sign-up.</p>
-        <div class="contact-detail">
-          <div class="contact-item">
-            <span class="contact-item-label">Email</span>
-            <a href="mailto:info@zenovabusiness.co.za">info@zenovabusiness.co.za</a>
-          </div>
-          <div class="contact-item">
-            <span class="contact-item-label">Location</span>
-            <span style="color: var(--muted)">Gqeberha (Port Elizabeth), Eastern Cape</span>
-          </div>
-          <div class="contact-item">
-            <span class="contact-item-label">Website</span>
-            <a href="https://zenovabusiness.co.za">zenovabusiness.co.za</a>
-          </div>
-        </div>
-      </div>
-      <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" placeholder="Brendan" required>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" placeholder="Hayward" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Business Email</label>
-          <input type="email" placeholder="you@yourbusiness.co.za" required>
-        </div>
-        <div class="form-group">
-          <label>Company Name</label>
-          <input type="text" placeholder="Your Business Name" required>
-        </div>
-        <div class="form-group">
-          <label>I'm interested in</label>
-          <select>
-            <option value="">Select a service...</option>
-            <option>Starter — R500/month</option>
-            <option>HR Pack — R1,500/month</option>
-            <option>Enterprise — Custom pricing</option>
-            <option>Just want a demo first</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Tell us about your business</label>
-          <textarea placeholder="What does your business do? What tasks are taking up too much of your time?"></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Send Enquiry →</button>
-      </form>
+    <div class="legal">
+      <span>© 2026 Zenova Business Solutions (Pty) Ltd · Registration 2026/246089/07</span>
+      <span>Personal information is processed in accordance with POPIA.</span>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <!-- FOOTER -->
-  <footer>
-    <a href="#" class="footer-logo">Zenova<span>.</span></a>
-    <p>© 2026 Zenova Business Solutions (Pty) Ltd. Gqeberha, South Africa.</p>
-    <ul class="footer-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </footer>
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  var onScroll=function(){nav.classList.toggle('stuck',window.scrollY>24)};
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
-  <script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
+  var tog=document.getElementById('navtoggle');
+  tog.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    tog.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nav.querySelectorAll('.navlinks a').forEach(function(a){
+    a.addEventListener('click',function(){nav.classList.remove('open');tog.setAttribute('aria-expanded','false')});
+  });
 
-    // Fade up on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  // demand curve: seven-hour plateau, not a midday spike
+  var demand=[18,34,58,86,92,95,97,94,90,88,82,46];
+  var db=document.getElementById('dbars');
+  demand.forEach(function(v,i){
+    var d=document.createElement('div');
+    d.className='dbar';
+    d.style.height=Math.max(8,v)+'%';
+    d.style.animationDelay=(i*28)+'ms';
+    db.appendChild(d);
+  });
 
-    // Form submit
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('.btn-submit');
-      btn.textContent = 'Sent! We\'ll be in touch shortly.';
-      btn.style.background = '#2a2a2a';
-      btn.style.color = '#c8f04a';
-      btn.disabled = true;
+  // shifts: [label, startCol, endCol, breakCol]
+  var staff=[
+    ['FE-01',0,8,4],
+    ['FE-02',0,9,5],
+    ['FE-03',1,10,6],
+    ['DELI-1',2,11,7],
+    ['FE-04',3,12,8],
+    ['FE-05',4,12,9]
+  ];
+  var rows=document.getElementById('rows');
+  staff.forEach(function(s,r){
+    var row=document.createElement('div');row.className='row';
+    var nm=document.createElement('div');nm.className='rname';nm.textContent=s[0];
+    var tr=document.createElement('div');tr.className='track';
+    for(var c=0;c<12;c++){
+      var cell=document.createElement('div');
+      if(c>=s[1]&&c<s[2]){
+        cell.className=(c===s[3])?'brk':'shift';
+        cell.style.animationDelay=(340+r*70+(c-s[1])*22)+'ms';
+      }else{
+        cell.className='cell';
+      }
+      tr.appendChild(cell);
     }
-  </script>
+    row.appendChild(nm);row.appendChild(tr);rows.appendChild(row);
+  });
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+})();
+</script>
 </body>
 </html>
