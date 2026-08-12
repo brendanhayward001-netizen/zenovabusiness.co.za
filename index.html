@@ -54,12 +54,12 @@ h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;
 .navlinks{display:flex;gap:28px;list-style:none;align-items:center}
 .navlinks a{font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;padding:4px 0;border-bottom:1px solid transparent;transition:border-color .2s,color .2s}
 .navlinks a:hover{color:var(--ink);border-bottom-color:var(--petrol-2)}
-.navbtn{
+.navlinks a.navbtn{
   background:var(--petrol);color:var(--paper);text-decoration:none;
   font-size:14px;font-weight:600;padding:10px 20px;border-radius:2px;
-  transition:background .2s;
+  border-bottom:none;transition:background .2s;
 }
-.navbtn:hover{background:var(--petrol-2)}
+.navlinks a.navbtn:hover{background:var(--petrol-2);color:var(--paper);border-bottom-color:transparent}
 .navtoggle{display:none;background:none;border:1px solid var(--line);border-radius:2px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer}
 
 /* ---------- hero ---------- */
